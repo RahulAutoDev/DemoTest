@@ -15,7 +15,7 @@ public class RunDemoTest {
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://www.google.com");
-		//System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getCurrentUrl());
 		//Assert.assertEquals(driver.getCurrentUrl(), "Testdata");
 		System.out.println("Hello JENKINS.....");
 		driver.quit();
