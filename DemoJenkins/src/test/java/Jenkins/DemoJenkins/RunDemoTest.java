@@ -21,7 +21,7 @@ public class RunDemoTest {
 		WebElement googleSearchBar = driver.findElement(By.cssSelector("#APjFqb"));
 		WebElement googleFeelBtn = driver.findElement(RelativeLocator.with(By.tagName("input")).below(googleSearchBar));
 		googleFeelBtn.click();
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		System.out.println(driver.getCurrentUrl());
 		//Assert.assertEquals(driver.getCurrentUrl(), "Testdata");
 		System.out.println("Hello JENKINS.....");
