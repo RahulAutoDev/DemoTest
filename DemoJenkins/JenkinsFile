@@ -1,9 +1,25 @@
-pipeline { 
-    agent any  
-    stages { 
-        stage('Build') { 
-            steps { 
-               echo 'This is a minimal pipeline.' 
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -f DemoJenkins/pom.xml -B -DskipTests clean package'
+            }
+            post {
+                success {
+                    echo "Now Archiving the Artifacts....."
+                    archiveArtifacts artifacts: '**/*.jar'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn -f DemoJenkins/pom.xml test'
+            }
+            post {
+                always {
+                    junit 'DemoJenkins/target/surefire-reports/*.xml'
+                }
             }
         }
     }
