@@ -22,15 +22,5 @@ pipeline {
                 }
             }
         }
-        post {
-	        success {
-	            // Perform actions when the pipeline succeeds
-	            echo 'Pipeline succeeded!'
-	        }
-	        failure {
-	            // Perform actions when the pipeline fails
-	            echo 'Pipeline failed!'
-	        }
-	    }
     }
 }
