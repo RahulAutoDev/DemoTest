@@ -22,11 +22,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                // Add deployment steps here
-            }
-        }
         post {
 	        success {
 	            // Perform actions when the pipeline succeeds
