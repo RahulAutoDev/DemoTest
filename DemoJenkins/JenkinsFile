@@ -9,6 +9,8 @@ pipeline {
             steps {
             
             		sh '''
+            		git 'git'
+            		maven 'maven'
             		git --version
             		mvn --version
             		'''
