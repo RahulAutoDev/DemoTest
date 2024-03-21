@@ -1,9 +1,17 @@
 pipeline {
     agent any
+    environment {
+    RELEASE ='20.04'
+    }
     stages {
         stage('Build') {
+        		agent any
+        		environment {
+        		LOG_LEVEL='INFO'
+        		}
             steps {
                 sh 'mvn -f DemoJenkins/pom.xml -B -DskipTests clean package'
+                echo "Building release ${RELEASE} with log level ${LOG_LEVEL}...."
             }
             post {
                 success {
@@ -15,12 +23,25 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn -f DemoJenkins/pom.xml test'
+                echo "Testing release ${RELEASE}...."
             }
             post {
                 always {
                     junit 'DemoJenkins/target/surefire-reports/*.xml'
                 }
             }
+        }
+        stage('Deploy') {
+        		input {
+        			message 'Deploy?'
+        			of 'Do it!'
+        			parameters {
+        				string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+        			}
+        		}
+        		steps {
+        			echo "Deploying release...."
+        		} 
         }
     }
 }
