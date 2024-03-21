@@ -7,11 +7,13 @@ pipeline {
     
     		stage('Audit Tools') {
             steps {
-                sh 'sudo apt-get install git'
-                sh 'git --version'
-
-                sh 'sudo apt install maven'
-                sh 'mvn --version'
+            
+            		sh '''
+            		sudo apt install git
+            		git --version
+            		sudo apt install maven
+            		mvn --version
+            		'''
             }
         }
     		
