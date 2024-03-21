@@ -4,6 +4,32 @@ pipeline {
     RELEASE ='20.04'
     }
     stages {
+    
+    		stage('Audit Tools') {
+            steps {
+                sh 'sudo apt-get install git'
+                sh 'git --version'
+
+                sh 'sudo apt install maven'
+                sh 'mvn --version'
+
+                '''
+                maven install
+                sudo apt install maven
+                mvn --version
+
+                java install
+                sudo apt install oracle-java17-installer
+                java --version
+
+                browser install
+                sudo apt-get install google-chrome-stable
+                sudo apt -f install
+                '''
+            }
+        }
+    		
+    		
         stage('Build') {
         		agent any
         		environment {
