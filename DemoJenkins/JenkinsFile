@@ -9,9 +9,9 @@ pipeline {
             steps {
             
             		sh '''
-            		sudo apt install git
+            		apt install git
             		git --version
-            		sudo apt install maven
+            		apt install maven
             		mvn --version
             		'''
             }
