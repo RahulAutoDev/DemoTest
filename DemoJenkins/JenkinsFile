@@ -44,4 +44,9 @@ pipeline {
         		} 
         }
     }
+        post {
+        		always {
+        			echo 'Print whether deploy happened or not, success or failure'
+        	}
+    }
 }
