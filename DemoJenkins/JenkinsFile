@@ -12,20 +12,6 @@ pipeline {
 
                 sh 'sudo apt install maven'
                 sh 'mvn --version'
-
-                '''
-                maven install
-                sudo apt install maven
-                mvn --version
-
-                java install
-                sudo apt install oracle-java17-installer
-                java --version
-
-                browser install
-                sudo apt-get install google-chrome-stable
-                sudo apt -f install
-                '''
             }
         }
     		
