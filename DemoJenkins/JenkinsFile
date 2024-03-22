@@ -28,7 +28,6 @@ pipeline {
             post {
                 success {
                     echo "Now Archiving the Artifacts....."
-                    archiveArtifacts artifacts: '**/*.war'
                 }
             }
         }
@@ -53,6 +52,7 @@ pipeline {
         		}
         		steps {
         			echo "Deploying release...."
+        			archiveArtifacts artifacts: '**/*.war'
         		} 
         }
     }
