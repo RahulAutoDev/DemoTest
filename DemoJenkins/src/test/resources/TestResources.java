@@ -1,4 +1,4 @@
 
-public class TestResources {
+public class Test12 {
 
 }
