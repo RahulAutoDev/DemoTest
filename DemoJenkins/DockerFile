@@ -1,0 +1,4 @@
+FROM openjdk:11.0.22
+ADD target/DemoDenkins.jar DemoDenkins.jar
+ENTRYPOINT ["java", "-jar","DemoDenkins.jar"]
+EXPOSE 8080
