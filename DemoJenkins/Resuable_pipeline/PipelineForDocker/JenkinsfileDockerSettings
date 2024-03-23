@@ -1,0 +1,86 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE ='20.04'
+        DATE = new Date().format('yy.M')
+        TAG = "${DATE}.${BUILD_NUMBER}"
+    }
+    stages {
+        stage ('Clone') {
+            steps {
+                git branch: 'master', url: "https://github.com/RahulAutoDev/DemoTest.git"
+            }
+        }
+        stage('Audit Tools') {
+            steps {
+                sh 'git --version'
+                sh 'mvn --version'
+            }
+        }
+
+        stage('Build') {
+        		agent any
+        		environment {
+        		LOG_LEVEL='INFO'
+        		}
+            steps {
+                sh 'mvn -f DemoJenkins/pom.xml -B -DskipTests clean package'
+                echo "Building release ${RELEASE} with log level ${LOG_LEVEL}...."
+            }
+            post {
+                success {
+                    echo "Now Archiving the Artifacts....."
+                    archiveArtifacts artifacts: '**/*.jar'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn -f DemoJenkins/pom.xml test'
+                echo "Testing release ${RELEASE}...."
+            }
+            post {
+                always {
+                    junit 'DemoJenkins/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("rahulautodocker/test_demo1:${TAG}")
+                }
+            }
+        }
+        stage('Pushing Docker Image to Dockerhub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', '0d7a2272-8c41-45b6-a425-636438909730') {
+                        docker.image("rahulautodocker/test_demo1:${TAG}").push()
+                        docker.image("rahulautodocker/test_demo1:${TAG}").push("latest")
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+        		input {
+        			message 'Deploy?'
+        			of 'Do it!'
+        			parameters {
+        				string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+        			}
+        		}
+        		steps {
+        			echo "Deploying release...."
+                    sh "docker stop test_demo1 | true"
+                    sh "docker rm htest_demo1 | true"
+                    sh "docker run --name test_demo1 -d -p 9004:8080 rahulautodocker/test_demo1:${TAG}"
+        		} 
+            }
+    }
+    post {
+        always {
+        		echo 'Print wether deploy happened or not, success or failure'
+        }
+    }
+}
