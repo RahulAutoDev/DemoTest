@@ -48,7 +48,8 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("rahulautodocker/test_demo1:${TAG}", "-f DemoJenkins/DockerFile")
+                	    def dockerfile = 'DemoJenkins/DockerFile' // Specify the path to your Dockerfile
+                    docker.build("rahulautodocker/test_demo1:${TAG}", "-f ${dockerfile} .")
                 }
             }
         }
