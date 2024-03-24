@@ -81,12 +81,17 @@ pipeline {
     }
     post {
         	success {
-            echo 'I will say Hello only if job is success'
-            currentBuild.result = 'SUCCESS'
+        		step{
+        			    echo 'I will say Hello only if job is success'
+            			currentBuild.result = 'SUCCESS'
+        		}
         }
         failure {
-            echo 'I will say Hello only if job is failure'
-            currentBuild.result = 'FAILURE'
+        		step{
+        			     echo 'I will say Hello only if job is failure'
+            			currentBuild.result = 'FAILURE'
+        		}
+
         }
     }
 }
