@@ -74,7 +74,7 @@ pipeline {
         		steps {
         			echo "Deploying release...."
                     sh "docker stop test_demo1 | true"
-                    sh "docker rm htest_demo1 | true"
+                    sh "docker rm test_demo1 | true"
                     sh "docker run --name test_demo1 -d -p 9004:8080 rahulautodocker/test_demo1:${TAG}"
         		} 
             }
