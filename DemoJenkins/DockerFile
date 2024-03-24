@@ -1,4 +1,24 @@
-FROM openjdk:11.0.22
-ADD target/DemoDenkins.jar DemoDenkins.jar
-ENTRYPOINT ["java", "-jar","DemoDenkins.jar"]
+# Use a base image with Maven pre-installed
+FROM maven:3.8.4-openjdk-17-slim AS builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Maven project files to the container
+COPY pom.xml .
+COPY src ./src
+
+# Build the Maven project
+RUN mvn clean package
+
+# Use a lightweight base image for the runtime environment
+FROM openjdk:17-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the compiled JAR file from the builder stage to the runtime environment
+COPY --from=builder /app/target/DemoJenkins-0.0.1-SNAPSHOT.jar .
+
+# Expose the port(s) your application is listening on
 EXPOSE 8080
