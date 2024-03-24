@@ -56,7 +56,7 @@ pipeline {
         stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', '0d7a2272-8c41-45b6-a425-636438909730') {
+                    docker.withRegistry('https://registry.hub.docker.com/v2/', '0d7a2272-8c41-45b6-a425-636438909730') {
                         docker.image("rahulautodocker/test_demo1:${TAG}").push()
                         docker.image("rahulautodocker/test_demo1:${TAG}").push("latest")
                     }
@@ -80,8 +80,11 @@ pipeline {
             }
     }
     post {
-        always {
-        		echo 'Print wether deploy happened or not, success or failure'
+        	success {
+            echo 'I will say Hello only if job is success'
+        }
+        failure {
+            echo 'I will say Hello only if job is failure'
         }
     }
 }
