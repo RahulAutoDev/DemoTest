@@ -1,10 +1,5 @@
 pipeline {
-        agent {
-	        docker {
-	            image 'maven:3.9.3-eclipse-temurin-17'
-	            args '-v $HOME/.m2:/root/.m2'
-	        }
-    }
+    agent any
     environment {
         RELEASE ='20.04'
         DATE = new Date().format('yy.M')
@@ -87,9 +82,11 @@ pipeline {
     post {
         	success {
             echo 'I will say Hello only if job is success'
+            currentBuild.result = 'SUCCESS'
         }
         failure {
             echo 'I will say Hello only if job is failure'
+            currentBuild.result = 'FAILURE'
         }
     }
 }
