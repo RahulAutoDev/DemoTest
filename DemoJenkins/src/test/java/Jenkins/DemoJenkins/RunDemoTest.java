@@ -32,7 +32,7 @@ public class RunDemoTest {
 		Thread.sleep(5000);
 		System.out.println(driver.getCurrentUrl());
 		//Assert.assertEquals(driver.getCurrentUrl(), "Testdata");
-		System.out.println("Hello JENKINS.....");
+		System.out.println("Hello JENKINS I am here.....");
 		driver.quit();
 	}
 	
