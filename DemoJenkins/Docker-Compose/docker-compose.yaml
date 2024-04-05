@@ -1,0 +1,4 @@
+version: "3"
+services:
+  DockerComposeServices:
+    image: rahulautodocker/test_demo1:latest
