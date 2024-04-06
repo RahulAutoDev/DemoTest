@@ -1,4 +1,9 @@
 version: "3"
 services:
-  DockerComposeServices:
-    image: rahulautodocker/test_demo1:latest
+  nginx:
+    image: nginx
+    port:
+      - 80:80
+  alpine:
+    image: alpine
+    entrypoint: "ping nginx"
