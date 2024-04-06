@@ -3,7 +3,9 @@ services:
   nginx:
     image: nginx
     ports:
-      - 80:80
+    - 80:80
   alpine:
     image: alpine
     entrypoint: "ping nginx"
+    depends_on:
+    - nginx
