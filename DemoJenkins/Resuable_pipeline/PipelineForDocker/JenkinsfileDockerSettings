@@ -30,7 +30,7 @@ pipeline {
         		LOG_LEVEL='INFO'
         		}
             steps {
-                sh 'mvn -f DemoJenkins/pom.xml -B -DskipTests clean package'
+                sh 'DemoJenkins/mvnw -f DemoJenkins/pom.xml -B -DskipTests clean package'
                 echo "Building release ${RELEASE} with log level ${LOG_LEVEL}...."
             }
             post {
