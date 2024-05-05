@@ -1,11 +1,31 @@
-version: "3"
+version: '3'
+
 services:
-  nginx:
-    image: nginx
+  selenium-hub:
+    image: selenium/hub
     ports:
-    - 80:80
-  alpine:
-    image: alpine
-    entrypoint: "ping nginx"
+      - "4444:4444"
+
+  chrome-node:
+    image: selenium/node-chrome
     depends_on:
-    - nginx
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+
+  firefox-node:
+    image: selenium/node-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+
+  edge-node:
+    image: selenium/node-edge
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444

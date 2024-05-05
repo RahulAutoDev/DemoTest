@@ -17,6 +17,11 @@ pipeline {
                 sh 'mvn --version'
             }
         }
+        stage('Start Selenium Grid') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
 
         stage('Build') {
         		agent any
