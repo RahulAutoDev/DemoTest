@@ -19,7 +19,8 @@ pipeline {
         }
         stage('Start Selenium Grid') {
             steps {
-                sh 'DemoJenkins/Docker-Compose/docker-compose.yaml docker compose up -d'
+                
+                sh 'docker-compose -f DemoJenkins/Docker-Compose/docker-compose.yaml up -d'
             }
         }
 
