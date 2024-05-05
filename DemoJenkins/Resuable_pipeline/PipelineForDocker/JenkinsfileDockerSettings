@@ -95,7 +95,7 @@ pipeline {
             steps {
                 script {
                     // Stop and remove Selenium Grid containers
-                    sh 'docker-compose down'
+                    //sh 'docker-compose down'
                 }
             }
         }
