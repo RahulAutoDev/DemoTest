@@ -90,14 +90,6 @@ pipeline {
                     sh "docker rm test_demo1 | true"
                     sh "docker run --name test_demo1 -d -p 9004:8080 rahulautodocker/test_demo1:${TAG}"
         		} 
-            }
-        stage('Stop Selenium Grid') {
-            steps {
-                script {
-                    // Stop and remove Selenium Grid containers
-                    //sh 'docker-compose down'
-                }
-            }
         }
     }
     post {
