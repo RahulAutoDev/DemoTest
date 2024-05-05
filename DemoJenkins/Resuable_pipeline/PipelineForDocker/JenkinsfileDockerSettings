@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh 'git --version'
                 sh '''
-				    curl -fsSL -O http://apache.mirrors.hoobly.com/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+				    curl -fsSL -O https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.4/apache-maven-3.8.4-bin.tar.gz
 				    tar xf apache-maven-3.8.4-bin.tar.gz
 				    export M2_HOME=$PWD/apache-maven-3.8.4
 				    export PATH=$M2_HOME/bin:$PATH
