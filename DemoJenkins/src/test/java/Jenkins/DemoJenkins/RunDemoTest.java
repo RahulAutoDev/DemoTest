@@ -26,7 +26,6 @@ public class RunDemoTest {
 		DesiredCapabilities cap = new DesiredCapabilities();
 		cap.setBrowserName("chrome");
 		cap.setPlatform(Platform.ANY);
-		WebDriverManager.chromedriver().setup();
 		ChromeOptions option = new ChromeOptions();
 		option.merge(cap);
         option.addArguments("--headless");
@@ -36,6 +35,7 @@ public class RunDemoTest {
         option.addArguments("--silent");
         option.addArguments("--remote-allow-origins=*");
 		//WebDriver driver = new ChromeDriver(option);
+        WebDriverManager.chromedriver().clearDriverCache().setup();
 		String hubURL = "http://143.110.244.31:4444/wd/hub";
 		WebDriver driver = new RemoteWebDriver(new URL(hubURL), option);
 		driver.get("https://www.google.com");
