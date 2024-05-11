@@ -49,7 +49,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn -f DemoJenkins/pom.xml test'
-                sh 'mvn -f DemoJenkins/pom.xml test -Dwebdriver.url=http://143.110.244.31:4444/wd/hub'
+                sh 'mvn -f DemoJenkins/pom.xml test -Dwebdriver.url=http://35.188.16.36:4444/wd/hub'
                 echo "Testing release ${RELEASE}...."
             }
             post {
