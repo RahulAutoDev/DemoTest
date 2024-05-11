@@ -26,7 +26,7 @@ pipeline {
         stage('Start Selenium Grid') {
             steps {
                 
-                sh 'docker-compose -f DemoJenkins/Docker-Compose/docker-compose.yaml up -d'
+                sh 'docker-compose -f /home/rahul_26gemini/DemoTest/DemoJenkins/Docker-Compose/docker-compose.yaml up -d'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
         		LOG_LEVEL='INFO'
         		}
             steps {
-                sh 'mvn -f DemoJenkins/pom.xml -B -DskipTests clean package'
+                sh 'mvn -f /home/rahul_26gemini/DemoTest/DemoJenkins/pom.xml -B -DskipTests clean package'
                 echo "Building release ${RELEASE} with log level ${LOG_LEVEL}...."
             }
             post {
@@ -48,8 +48,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn -f DemoJenkins/pom.xml test'
-                sh 'mvn -f DemoJenkins/pom.xml test -Dwebdriver.url=http://35.188.16.36:4444/wd/hub'
+                sh 'mvn -f /home/rahul_26gemini/DemoTest/DemoJenkins/pom.xml test'
+                sh 'mvn -f /home/rahul_26gemini/DemoTest/DemoJenkins/pom.xml test -Dwebdriver.url=http://35.188.16.36:4444/wd/hub'
                 echo "Testing release ${RELEASE}...."
             }
             post {
@@ -61,7 +61,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                	    def dockerfile = 'DemoJenkins/DockerFile' // Specify the path to your Dockerfile
+                	    def dockerfile = '/home/rahul_26gemini/DemoTest/DemoJenkins/DockerFile' // Specify the path to your Dockerfile
                     docker.build("rahulautodocker/test_demo1:${TAG}", "-f ${dockerfile} .")
                 }
             }
