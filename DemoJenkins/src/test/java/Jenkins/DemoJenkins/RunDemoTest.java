@@ -36,7 +36,7 @@ public class RunDemoTest {
         option.addArguments("--remote-allow-origins=*");
 		//WebDriver driver = new ChromeDriver(option);
         WebDriverManager.chromedriver().clearDriverCache().setup();
-		String hubURL = "http://35.188.16.36:8080:4444/wd/hub";
+		String hubURL = "http://35.188.16.36:4444/wd/hub";
 		WebDriver driver = new RemoteWebDriver(new URL(hubURL), option);
 		driver.get("https://www.google.com");
 		WebElement googleSearchBar = driver.findElement(By.cssSelector("#APjFqb"));
