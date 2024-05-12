@@ -30,6 +30,7 @@ pipeline {
             			dir('DemoTest/DemoJenkins/Docker-Compose') 
             			{
                         sh '/usr/bin/docker-compose up --build -d'
+                     }
             		}
             }
         }
