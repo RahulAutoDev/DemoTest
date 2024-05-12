@@ -4,7 +4,7 @@ pipeline {
         RELEASE ='20.04'
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
-        PATH = "$PATH:/usr/bin"
+        PATH = "${env.PATH}:/usr/bin/docker-compose"
     }
     stages {
         stage ('Clone') {
@@ -27,10 +27,7 @@ pipeline {
         stage('Start Selenium Grid') {
             steps {
             		script{
-            			dir('DemoTest/DemoJenkins/Docker-Compose') 
-            			{
-                        sh '/usr/bin/docker-compose up --build -d'
-                     }
+                        sh 'docker-compose -f DemoTest/DemoJenkins/Docker-Compose/docker-compose.yaml up -d'
             		}
             }
         }
