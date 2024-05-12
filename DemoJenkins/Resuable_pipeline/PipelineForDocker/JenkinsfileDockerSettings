@@ -27,7 +27,7 @@ pipeline {
         stage('Start Selenium Grid') {
             steps {
                 echo "PATH is: $PATH"
-                sh 'docker-compose -f DemoTest/DemoJenkins/Docker-Compose/docker-compose.yaml up -d'
+                sh "/usr/bin/docker-compose -f DemoTest/DemoJenkins/Docker-Compose/docker-compose.yaml up --build -d"
                
             }
         }
