@@ -27,7 +27,7 @@ pipeline {
         stage('Start Selenium Grid') {
             steps {
             		script{
-                        sh 'docker-compose -f DemoTest/DemoJenkins/Docker-Compose/DockerWithJenkins/DockerComposeFileWithJenkinsServer.yml up -d'
+                        sh 'docker-compose -f DemoTest/DemoJenkins/Docker-Compose/docker-compose.yml up -d'
             		}
             }
         }
@@ -51,7 +51,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn -f DemoTest/DemoJenkins/pom.xml test'
-                sh 'mvn -f DemoTest/DemoJenkins/pom.xml test -Dwebdriver.url=http://35.188.16.36:4444/wd/hub'
+                sh 'mvn -f DemoTest/DemoJenkins/pom.xml test -Dwebdriver.url=http://65.0.105.213:4444'
                 echo "Testing release ${RELEASE}...."
             }
             post {
