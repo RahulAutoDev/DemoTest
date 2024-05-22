@@ -43,7 +43,7 @@ pipeline {
         		LOG_LEVEL='INFO'
         		}
             steps {
-                sh 'mvn -f DemoTest/DemoJenkins/pom.xml -B -DskipTests clean package'
+                sh 'mvn -f DemoJenkins/pom.xml -B -DskipTests clean package'
                 echo "Building release ${RELEASE} with log level ${LOG_LEVEL}...."
             }
             post {
@@ -55,8 +55,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn -f DemoTest/DemoJenkins/pom.xml test'
-                sh 'mvn -f DemoTest/DemoJenkins/pom.xml test -Dwebdriver.url=http://65.0.105.213:4444'
+                sh 'mvn -f DemoJenkins/pom.xml test'
+                sh 'mvn -f DemoJenkins/pom.xml test -Dwebdriver.url=http://65.0.105.213:4444'
                 echo "Testing release ${RELEASE}...."
             }
             post {
@@ -68,7 +68,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                	    def dockerfile = 'DemoTest/DemoJenkins/DockerFile' // Specify the path to your Dockerfile
+                	    def dockerfile = 'DemoJenkins/DockerFile' // Specify the path to your Dockerfile
                     docker.build("rahulautodocker/test_demo1:${TAG}", "-f ${dockerfile} .")
                 }
             }
