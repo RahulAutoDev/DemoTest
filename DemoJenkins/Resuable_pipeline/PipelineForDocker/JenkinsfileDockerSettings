@@ -27,7 +27,7 @@ pipeline {
         stage('Start Selenium Grid') 
         {
             steps {
-            			dir('DemoTest/DemoJenkins/Docker-Compose')
+            			dir('DemoJenkins/Docker-Compose')
             			{
             				script{
                         		sh 'docker-compose up --build -d'
