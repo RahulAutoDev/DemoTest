@@ -39,7 +39,7 @@ public class RunDemoTest {
         option.addArguments("--ignore-certificate-errors");      
         option.addArguments("--silent");
         
-		String hubURL = "http://65.0.105.213:4444";
+		String hubURL = "http://65.0.105.213:4444/wd/hub";
 		WebDriver driver = new RemoteWebDriver(new URL(hubURL), option);
 		driver.get("https://www.google.com");
 		WebElement googleSearchBar = driver.findElement(By.cssSelector("#APjFqb"));
