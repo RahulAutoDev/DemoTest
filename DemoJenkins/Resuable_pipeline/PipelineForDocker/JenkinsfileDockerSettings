@@ -56,7 +56,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn -f DemoJenkins/pom.xml test'
-                sh 'mvn -f DemoJenkins/pom.xml test -Dwebdriver.url=http://65.0.105.213:4444'
+                
                 echo "Testing release ${RELEASE}...."
             }
             post {
