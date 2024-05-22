@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -24,19 +25,21 @@ public class RunDemoTest {
 	public void runMyTest() throws InterruptedException, MalformedURLException
 	{
 		DesiredCapabilities cap = new DesiredCapabilities();
-		cap.setBrowserName("chrome");
-		cap.setPlatform(Platform.ANY);
-		ChromeOptions option = new ChromeOptions();
+		//cap.setBrowserName("chrome");
+		//cap.setBrowserName("firefox");
+		cap.setBrowserName("MicrosoftEdge");
+		cap.setPlatform(Platform.UNIX);
+		//ChromeOptions option = new ChromeOptions();
+		//FirefoxOptions option = new FirefoxOptions();
+		EdgeOptions option = new EdgeOptions();
 		option.merge(cap);
         option.addArguments("--headless");
         option.addArguments("--disable-gpu");
         option.addArguments("--window-size=1920,1200");
         option.addArguments("--ignore-certificate-errors");      
         option.addArguments("--silent");
-        option.addArguments("--remote-allow-origins=*");
-		//WebDriver driver = new ChromeDriver(option);
-        WebDriverManager.chromedriver().clearDriverCache().setup();
-		String hubURL = "http://35.188.16.36:4444/wd/hub";
+        
+		String hubURL = "http://65.0.105.213:4444";
 		WebDriver driver = new RemoteWebDriver(new URL(hubURL), option);
 		driver.get("https://www.google.com");
 		WebElement googleSearchBar = driver.findElement(By.cssSelector("#APjFqb"));
