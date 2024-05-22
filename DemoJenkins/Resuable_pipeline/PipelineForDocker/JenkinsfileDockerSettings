@@ -4,7 +4,7 @@ pipeline {
         RELEASE ='20.04'
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
-        PATH = "${env.PATH}:/usr/bin/docker-compose"
+        PATH = "/usr/local/bin:${env.PATH}"
     }
     stages {
         stage ('Clone') {
