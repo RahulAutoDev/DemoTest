@@ -5,12 +5,12 @@ pipeline {
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
         PATH = "/usr/local/bin:${env.PATH}"
-        REPO_URL = 'https://github.com/your-username/your-repository.git'
+        REPO_URL = 'https://github.com/RahulAutoDev/DemoTest.git'
     }
     stages {
         stage ('Clone') {
             steps {
-                git branch: 'master', url: 'https://github.com/your-username/your-repository.git'
+                git branch: 'master', url: 'https://github.com/RahulAutoDev/DemoTest.git'
             }
         }
         stage('Audit Tools') {
