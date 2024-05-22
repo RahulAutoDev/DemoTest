@@ -22,7 +22,6 @@ pipeline {
 				    export M2_HOME=$PWD/apache-maven-3.8.4
 				    export PATH=$M2_HOME/bin:$PATH
                 '''
-                sh 'mvn clean install'
             }
         }
         stage('Start Selenium Grid') 
