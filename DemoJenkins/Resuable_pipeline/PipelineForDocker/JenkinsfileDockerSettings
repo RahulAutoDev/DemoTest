@@ -5,11 +5,12 @@ pipeline {
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
         PATH = "/usr/local/bin:${env.PATH}"
+        REPO_URL = 'https://github.com/your-username/your-repository.git'
     }
     stages {
         stage ('Clone') {
             steps {
-                git branch: 'master', url: "https://github.com/RahulAutoDev/DemoTest.git"
+                git branch: 'master', url: "${REPO_URL}"
             }
         }
         stage('Audit Tools') {
@@ -21,15 +22,19 @@ pipeline {
 				    export M2_HOME=$PWD/apache-maven-3.8.4
 				    export PATH=$M2_HOME/bin:$PATH
                 '''
-                
+                sh 'mvn clean install'
             }
         }
-        stage('Start Selenium Grid') {
+        stage('Start Selenium Grid') 
+        {
             steps {
-            		script{
-            				sh 'ls -al ./DemoTest/DemoJenkins/Docker-Compose/'
-                        sh 'docker-compose -f DemoTest/DemoJenkins/Docker-Compose/docker-compose.yaml up --build -d'
+            			dir('DemoTest/DemoJenkins/Docker-Compose')
+            			{
+            				script{
+                        		sh 'docker-compose up --build -d'
+            			}
             		}
+
             }
         }
 
