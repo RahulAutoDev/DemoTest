@@ -6,6 +6,7 @@ pipeline {
         TAG = "${DATE}.${BUILD_NUMBER}"
         PATH = "/usr/local/bin:${env.PATH}"
         REPO_URL = 'https://github.com/RahulAutoDev/DemoTest.git'
+        HUB_URL = "http://65.2.3.215:4444/wd/hub"
     }
     stages {
         stage ('Clone') {
@@ -34,6 +35,17 @@ pipeline {
             			}
             		}
 
+            }
+        }
+        
+        stage('Verify /wd/hub') {
+            steps {
+                script {
+                    def hubStatus = sh(script: "curl -s -o /dev/null -w \"%{http_code}\" ${HUB_URL}/status", returnStdout: true).trim()
+                    if (hubStatus != '200') {
+                        error "Selenium Grid Hub is not accessible at ${HUB_URL}"
+                    }
+                }
             }
         }
 
