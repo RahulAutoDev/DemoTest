@@ -38,6 +38,7 @@ public class RunDemoTest {
         option.addArguments("--window-size=1920,1200");
         option.addArguments("--ignore-certificate-errors");      
         option.addArguments("--silent");
+        option.addArguments("--remote-allow-origin=*");
         
 		String hubURL = "http://65.2.3.215:4444";
 		WebDriver driver = new RemoteWebDriver(new URL(hubURL), option);
